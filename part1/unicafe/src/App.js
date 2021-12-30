@@ -23,10 +23,12 @@ const App = () => {
       <Button handleClick={() => setNeutral(neutral + 1)} text="neutral" />
       <Button handleClick={() => setBad(bad + 1)} text="bad" />
       <Label text="statistics" />
-      <Value text="good" value={good}/>
-      <Value text="neutral" value={neutral} />
-      <Value text="bad" value={bad} />
-      <Statistics good={good} neutral={neutral} bad={bad} />
+      <StatisticLine text="good" value={good} add="" />
+      <StatisticLine text="neutral" value={neutral} add="" />
+      <StatisticLine text="bad" value={bad} />
+      <StatisticLine text="all" value={good + neutral + bad} add="" />
+      <StatisticLine text="average" value={(good - bad) / (good + neutral + bad)} add="" />
+      <StatisticLine text="positive" value={good / (good + neutral + bad) * 100} add="%" />
     </>
   )
 }
@@ -35,19 +37,6 @@ const Label = ({ text }) => <h1>{text}</h1>
 
 const Button = ({ handleClick, text }) => <button onClick={handleClick} >{text}</button>
 
-const Value = ({ text, value }) => <div>{text} {value}</div>
-
-const Statistics = ({ good, neutral, bad }) => {
-  const sum = good + neutral + bad
-  const average = (good - bad) / (good + neutral + bad)
-  const pos = good / (good + neutral + bad) * 100
-  return (
-    <>
-    <div>all {sum}</div>
-    <div>average {average}</div>
-    <div>positive {pos} %</div>
-    </>
-  )
-}
+const StatisticLine = ({ text, value, add }) => <div>{text} {value} {add}</div>
 
 export default App
