@@ -15,6 +15,9 @@ const App = () => {
       <Value text="good" value={good}/>
       <Value text="neutral" value={neutral} />
       <Value text="bad" value={bad} />
+      <Sum good={good} neutral={neutral} bad={bad} />
+      <Average good={good} neutral={neutral} bad={bad} />
+      <Positive good={good} neutral={neutral} bad={bad} />
     </div>
   )
 }
@@ -24,5 +27,27 @@ const Label = ({ text }) => <h1>{text}</h1>
 const Button = ({ handleClick, text }) => <button onClick={handleClick} >{text}</button>
 
 const Value = ({ text, value }) => <div>{text} {value}</div>
+
+const Sum = ({ good, neutral, bad }) => {
+  const sum = good + neutral + bad
+  return (
+    <div>all {sum}</div>
+  )
+}
+
+const Average = ({ good, neutral, bad }) => {
+  const average = (good - bad) / (good + neutral + bad)
+  return (
+    <div>average {average}</div>
+  )
+}
+
+const Positive = ({ good, neutral, bad }) => {
+  const pos = good / (good + neutral + bad) * 100
+  return (
+    <div>positive {pos}%</div>
+  )
+}
+
 
 export default App
