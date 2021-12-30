@@ -21,13 +21,18 @@ const App = () => {
 
   return (
     <>
+      <Label text="Anecdote of the day" />
       <div>{anecdotes[selected]}</div>
       <Button text="vote" handleClick={addVote} />
       <Button text="next anecdote" handleClick={() => setSelected(Math.floor(Math.random()*anecdotes.length))} />
+      <Label text="Anecdote with most votes" />
+      <div>{anecdotes[votes.indexOf(Math.max.apply(Math, votes))]}</div>
     </>
   )
 }
 
 const Button = ({text, handleClick}) => <button onClick={handleClick}>{text}</button>
+
+const Label = ({ text }) => <h1>{text}</h1>
 
 export default App
