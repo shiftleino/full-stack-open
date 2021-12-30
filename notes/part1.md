@@ -20,3 +20,31 @@ Tiedonvälitys komponenttien välillä onnistuu hyödyntämällä niin sanottuja
 
 ## JavaScript
 - Aaltosulkeiden sisällä oleva koodi evaluoidaan ja tulos upotetaan määriteltyyn kohtaan komponentin HTML-koodia.
+
+Javascript suoritetaaan komennolla:
+```console
+node tiedosto.js 
+```
+
+Muuttujan määrittely: let
+Vakion määrittely: const
+Muuttujan tallettaman tiedon tyyppi voi muuttua. 
+
+Taulukon läpikäynti:
+```console
+const t = [1,2,3]
+t.push(4)
+t.forEach(value => {
+    console.log(value)
+})
+```
+
+React-koodissa kannattaa pushaamisen sijaan käyttäää concat-metodia uusien arvojen lisäämiseksi.
+
+Olioiden kenttiin voi viitata pistenotaatiolla tai hakasulkeilla. Olion määrittely: 
+```console
+const object = {
+    kenttä1: 'arvo',
+    kenttä2: 123,
+}
+```
