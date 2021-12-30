@@ -15,8 +15,32 @@ Reactissa ideana on koostaa sovellus useasta pienestä komponentista, joita voi 
 
 React-komponentin sisällön tulee sisältää yksi juurielementti (esim. div tai tyhjä elementti <>...</>) tai sisältö täytyy olla esimerkiksi taulukkona (hakasulkeet).
 
+Komponentin voi saada renderöitymään uudelleen sivulle kutsumalla funtkiota ReactDOM.render. Tämä ei kuitenkaan ole paras tapa päivittää komponentteja. 
+
 ### Tiedonvälitys komponenttien välillä
 Tiedonvälitys komponenttien välillä onnistuu hyödyntämällä niin sanottuja propseja. Propsit voidaan asettaa komponentin parametriksi normaaliin JavaScript tapaan. Tämä parametri saa arvokseen olion, jonka kenttinä ovat kaikki käyttäjän määrittelemät muuttujat.
+
+### Komponenttien tilat
+Komponenttien tiloja voi muuttaa useState-funktiolla. Alla esimerkki laskurista:
+```console
+const [ counter, setCounter ] = useState(0)
+```
+Tilaa muuttavan funktion kutsuminen aiheuttaa komponentin uudelleenrenderöitymisen.
+
+Jos halutaan luoda sovellukselle useita erillisiä tiloja, voidaan useState-funktiota kutsua moneen eri kertaan. Toinen vaihtoehto on luoda tilan paikalle oma olio. Tässä tapauksessa tilaa voi muokata esimerkiksi seuraavanlaisesti:
+```console
+const handleLeftClick = () => {
+  const newClicks = { 
+    ...clicks, 
+    left: clicks.left + 1 
+  }
+  setClicks(newClicks)
+}
+```
+Reactissa ei ole sallittua muuttaa tilaa suoraan, vaan aina täytyy tehdö vanhasta tilasta kopio ja muuttaa sitä, minkä jälkeen voi asettaa tämän uuden kopion vanhan tilalle. Funktiota useState ei saa kutsua loopissa tai ehtolausekkeiden sisällä.
+
+### Reactin debuggaus
+Koodin suorituksen voi pysäyttää Chromen developer-konsolin debuggeriin kirjoittamalla koodiin komennon "debugger". Debuggerissa on mahdollista suorittaa koodia rivi kerrallaan Sources-välilehden oikealla laidalla.
 
 ## JavaScript
 - Aaltosulkeiden sisällä oleva koodi evaluoidaan ja tulos upotetaan määriteltyyn kohtaan komponentin HTML-koodia.
