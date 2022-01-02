@@ -5,6 +5,7 @@ import Countries from "./components/Countries"
 const App = () => {
   const [countries, setCountries] = useState([]) 
   const [newFilter, setNewFilter] = useState("")
+  const [showAll, setShowAll] = useState(true)
 
   useEffect(() => {
     axios
@@ -15,13 +16,18 @@ const App = () => {
   }, [])
 
   const handleFilterChange = (event) => {
+    setShowAll(true)
     setNewFilter(event.target.value)
+  }
+
+  const changeShowAll = () => {
+    setShowAll(!showAll)
   }
 
   return (
     <div>
       <div>find countries<input value={newFilter} onChange={handleFilterChange} /></div>
-      <Countries countries={countries} filter={newFilter} />
+      <Countries countries={countries} filter={newFilter} changeShowAll={changeShowAll} showAll={showAll}/>
     </div>
   )
 }
