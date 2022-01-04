@@ -31,11 +31,18 @@ const App = () => {
         personService
           .update(person.id, changedPerson)
           .then(returnedPerson => {
+            setSuccess(true)
             setNotification(`Updated phone number of ${newName}`)
             setTimeout(() => setNotification(null), 5000)
             setPersons(persons.map(person => person.name !== newName ? person : returnedPerson))
             setNewName("")
             setNewNumber("")
+          })
+          .catch(() => {
+            setNotification(`Updating the number of ${newName} failed.`)
+            setTimeout(() => setNotification(null), 5000)
+            setSuccess(false)
+            setPersons(persons.filter(p => p.name !== newName))
           })
       }
     } else {
@@ -62,6 +69,7 @@ const App = () => {
       personService
         .deleteOne(event.target.id)
         .then(() => {
+          setSuccess(true)
           setPersons(persons.filter(person => person.id !== id))
           setNotification(`Deleted ${name}`)
           setTimeout(() => setNotification(null), 5000)
