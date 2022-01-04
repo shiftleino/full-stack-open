@@ -53,3 +53,7 @@ useEffect(() => {
     })
 }, [])
 ```
+
+## Palvelimella olevan datan muuttamminen
+Korvaamalla: HTTP PUT
+Muuttamalla kenttien arvoja: HTTP PATCH
