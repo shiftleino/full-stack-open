@@ -34,6 +34,18 @@ const App = () => {
     } 
   }
 
+  const deletePerson = (event) => {
+    event.preventDefault()
+    const id = parseInt(event.target.id)
+    const name = persons.find(person => person.id === id).name
+    const result = window.confirm(`Are you sure you want to delete ${name}?`)
+    if (result) {
+      personService
+        .deleteOne(event.target.id)
+        .then(setPersons(persons.filter(person => person.id !== id)))
+    }
+  }
+
   const handleNameChange = (event) => {
     setNewName(event.target.value)
   }
@@ -55,7 +67,7 @@ const App = () => {
       <h2>Numbers</h2>
       <div>
         {persons.filter(person => person.name.toLowerCase().includes(newFilter.toLowerCase())).map(person => 
-          <Person key={person.name} name={person.name} number={person.number} />
+          <Person key={person.id} name={person.name} number={person.number}  handleClick={deletePerson} id={person.id} />
         )}
       </div>
     </div>
