@@ -22,6 +22,12 @@ Projektin riippuvuuksien päivittäminen:
 npm update
 ```
 
+Express-sovelluksen luominen:
+```console
+const express = require('express')
+const app = express()
+```
+
 Koodissa HTTP-pyyntöön vastataan käyttäen response-olion metodia send. 
 
 ### nodemon
