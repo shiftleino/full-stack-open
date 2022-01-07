@@ -73,6 +73,10 @@ test("id is defined", async () => {
     expect(response.body[0].id).toBeDefined()
 })
 
+test("post works", async () => {
+    
+})
+
 afterAll(() => {
     mongoose.connection.close()
 })
