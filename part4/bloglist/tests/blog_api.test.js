@@ -74,7 +74,22 @@ test("id is defined", async () => {
 })
 
 test("post works", async () => {
-    
+    const newBlog = {
+        "title": "Errors in Statistical Modeling",
+        "author": "Meera Sharma",
+        "url": "https://towardsdatascience.com/errors-in-statistical-modeling-c22978a98269",
+        "likes": 150
+    }
+    await api
+        .post("/api/blogs")
+        .send(newBlog)
+        .expect(201)
+        .expect("Content-Type", /application\/json/)
+
+        const response = await api.get("/api/blogs")
+        const titles = response.body.map(b => b.title)
+        expect(response.body).toHaveLength(blogs.length + 1)
+        expect(titles).toContainEqual("Errors in Statistical Modeling")
 })
 
 afterAll(() => {
