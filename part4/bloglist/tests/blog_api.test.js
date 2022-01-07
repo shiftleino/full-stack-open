@@ -57,15 +57,20 @@ const blogs = [
 
 beforeEach(async () => {
     await Blog.deleteMany({})
-    blogs.forEach(async (blog) => {
+    for (const blog of blogs) {
         let blogObject = new Blog(blog)
         await blogObject.save()
-    })
+    }
 })
 
 test("blogs returned", async () => {
-    const response = await api.get('/api/blogs')
+    const response = await api.get("/api/blogs")
     expect(response.body).toHaveLength(blogs.length)
+})
+
+test("id is defined", async () => {
+    const response = await api.get("/api/blogs")
+    expect(response.body[0].id).toBeDefined()
 })
 
 afterAll(() => {
