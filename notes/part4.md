@@ -21,3 +21,9 @@ describe('theme', () => {
   // tests
 })
 ```
+
+## SuperTest
+API:n testaamiseen voi käyttää Jestin lisäksi SuperTest-kirjastoa.
+```console
+npm install --save-dev supertest
+```
