@@ -92,6 +92,22 @@ test("post works", async () => {
         expect(titles).toContainEqual("Errors in Statistical Modeling")
 })
 
+test("if likes empty", async () => {
+    const newBlog = {
+        "title": "Errors in Statistical Modeling",
+        "author": "Meera Sharma",
+        "url": "https://towardsdatascience.com/errors-in-statistical-modeling-c22978a98269",
+    }
+    await api
+        .post("/api/blogs")
+        .send(newBlog)
+        .expect(201)
+        .expect("Content-Type", /application\/json/)
+        const response = await api.get("/api/blogs")
+        const likes = response.body.map(b => b.likes)
+        expect(likes[blogs.length]).toBe(0)
+})
+
 afterAll(() => {
     mongoose.connection.close()
 })
