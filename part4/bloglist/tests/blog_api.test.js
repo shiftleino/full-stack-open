@@ -94,9 +94,9 @@ test("post works", async () => {
 
 test("if likes empty", async () => {
     const newBlog = {
-        "title": "Errors in Statistical Modeling",
-        "author": "Meera Sharma",
-        "url": "https://towardsdatascience.com/errors-in-statistical-modeling-c22978a98269",
+        title: "Errors in Statistical Modeling",
+        author: "Meera Sharma",
+        url: "https://towardsdatascience.com/errors-in-statistical-modeling-c22978a98269",
     }
     await api
         .post("/api/blogs")
@@ -106,6 +106,17 @@ test("if likes empty", async () => {
         const response = await api.get("/api/blogs")
         const likes = response.body.map(b => b.likes)
         expect(likes[blogs.length]).toBe(0)
+})
+
+test("title and url empty", async () => {
+    const newBlog = {
+        author: "Meera Sharma",
+        likes: 150
+    }
+    await api
+        .post("/api/blogs")
+        .send(newBlog)
+        .expect(400)
 })
 
 afterAll(() => {

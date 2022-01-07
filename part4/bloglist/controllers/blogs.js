@@ -12,12 +12,17 @@ blogsRouter.get("/", async (request, response, next) => {
 
 blogsRouter.post("/", async (request, response, next) => {
     const body = request.body
+
+    if (!body.title || !body.url) {
+        response.status(400).end()
+    }
+
     if (!body.likes) {
         const blog = new Blog({
-            "title": body.title,
-            "author": body.author,
-            "url": body.url,
-            "likes": 0
+            title: body.title,
+            author: body.author,
+            url: body.url,
+            likes: 0
         })
         try {
             const result = await blog.save()
