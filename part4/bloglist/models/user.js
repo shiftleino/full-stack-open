@@ -1,15 +1,5 @@
 const mongoose = require("mongoose")
 const uniqueValidator = require("mongoose-unique-validator")
-const config = require("../utils/config")
-const logger = require("../utils/logger")
-
-mongoose.connect(config.MONGODB_URI)
-    .then(() => {
-        logger.info("Connected to MongoDB")
-    })
-    .catch((error) => {
-        logger.error("Error connecting to MongoDB:", error.message)
-    })
 
 const userSchema = mongoose.Schema({
     username: { type: String, required: true, unique: true, minLength: 3 },

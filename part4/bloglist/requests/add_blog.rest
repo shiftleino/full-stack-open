@@ -5,5 +5,6 @@ Content-Type: application/json
     "title": "Errors in Statistical Modeling",
     "author": "Meera Sharma",
     "url": "https://towardsdatascience.com/errors-in-statistical-modeling-c22978a98269",
-    "likes": 150
+    "likes": 150,
+    "user": "61d96fdb34554f8e4edd4ad9"
 }
