@@ -120,6 +120,25 @@ const App = () => {
     }
   }
 
+  const deleteBlog = async (blog) => {
+    try {
+      window.confirm(`Remove blog ${blog.title} by ${blog.author}?`)
+      await blogService.deleteBlog(blog.id)
+      setBlogs(blogs.filter(blog2 => blog2.id !== blog.id))
+      setSuccess(true)
+      setNotification("Blog deleted successfully")
+      setTimeout(() => {
+        setNotification(null)
+      }, 5000)
+    } catch (exception) {
+      setSuccess(false)
+      setNotification("Couldn't delete the blog.")
+      setTimeout(() => {
+        setNotification(null)
+      }, 5000)
+    }
+  }
+
   if (user === null) {
     return (
       <div>
@@ -158,7 +177,7 @@ const App = () => {
         <BlogForm createBlog={createBlog} />
       </Togglable>
       {blogs.sort(compareFunction).map(blog =>
-      <Blog key={blog.id} blog={blog} likeBlog={likeBlog} />
+      <Blog key={blog.id} blog={blog} likeBlog={likeBlog} deleteBlog={deleteBlog} user={user} />
       )}
     </>
   )
