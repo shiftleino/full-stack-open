@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import Blog from "./components/Blog"
 import Notification from "./components/Notification"
 import BlogForm from "./components/BlogForm"
@@ -28,6 +28,8 @@ const App = () => {
       blogService.setToken(user.token)
     }
   }, [])
+
+  const blogFormRef = useRef()
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -73,9 +75,35 @@ const App = () => {
         setNotification(null)
       }, 5000)
       setBlogs(blogs.concat(blog))
+      blogFormRef.current.toggleVisibility()
     } catch (exception) {
       setSuccess(false)
-      setNotification(exception)
+      setNotification("Couldn't create the blog")
+      setTimeout(() => {
+        setNotification(null)
+      }, 5000)
+    }
+  }
+
+  const likeBlog = async (blog) => {
+    try {
+      const theBlog = {
+        user: blog.user.id,
+        likes: blog.likes,
+        author: blog.author,
+        title: blog.title,
+        url: blog.url
+      }
+      await blogService.like(theBlog, blog.id)
+      setBlogs(blogs.map(blog2 => blog2.id !== blog.id ? blog2 : blog))
+      setSuccess(true)
+      setNotification(`Blog ${blog.title} by ${blog.author} liked successfully`)
+      setTimeout(() => {
+        setNotification(null)
+      }, 5000)
+    } catch (exception) {
+      setSuccess(false)
+      setNotification("Couldn't like the blog.")
       setTimeout(() => {
         setNotification(null)
       }, 5000)
@@ -115,12 +143,12 @@ const App = () => {
       <Notification message={notification} success={success} />
       <h2>blogs</h2>
       <p>{user.name} logged in <button onClick={handleLogout}>logout</button></p>
-      <Togglable buttonLabel="create new blog">
+      <Togglable buttonLabel="create new blog" ref={blogFormRef} >
         <h2>create new</h2>
         <BlogForm createBlog={createBlog} />
       </Togglable>
       {blogs.map(blog =>
-      <Blog key={blog.id} blog={blog} />
+      <Blog key={blog.id} blog={blog} likeBlog={likeBlog} />
       )}
     </>
   )
