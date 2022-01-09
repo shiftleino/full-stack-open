@@ -1,3 +1,19 @@
-.notification {
-    color: red
+.error {
+    color: red;
+    font-size: 20px;
+    background: lightgrey;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.success {
+    color: green;
+    font-size: 20px;
+    background: lightgrey;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
 }
