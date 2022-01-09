@@ -85,6 +85,16 @@ const App = () => {
     }
   }
 
+  const compareFunction = (a, b) => {
+    if (a.likes > b.likes) {
+      return -1
+    } else if (a.likes < b.likes) {
+      return 1
+    } else {
+      return 0
+    }
+  }
+
   const likeBlog = async (blog) => {
     try {
       const theBlog = {
@@ -95,7 +105,7 @@ const App = () => {
         url: blog.url
       }
       await blogService.like(theBlog, blog.id)
-      setBlogs(blogs.map(blog2 => blog2.id !== blog.id ? blog2 : blog))
+      setBlogs(blogs.map(blog2 => blog2.id !== blog.id ? blog2 : blog).sort(compareFunction))
       setSuccess(true)
       setNotification(`Blog ${blog.title} by ${blog.author} liked successfully`)
       setTimeout(() => {
@@ -147,7 +157,7 @@ const App = () => {
         <h2>create new</h2>
         <BlogForm createBlog={createBlog} />
       </Togglable>
-      {blogs.map(blog =>
+      {blogs.sort(compareFunction).map(blog =>
       <Blog key={blog.id} blog={blog} likeBlog={likeBlog} />
       )}
     </>
