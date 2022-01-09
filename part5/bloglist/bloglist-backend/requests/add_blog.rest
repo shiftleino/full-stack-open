@@ -1,0 +1,11 @@
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: bearer TOKEN
+
+{
+    "title": "Errors in Statistical Modeling",
+    "author": "Meera Sharma",
+    "url": "https://towardsdatascience.com/errors-in-statistical-modeling-c22978a98269",
+    "likes": 150,
+    "user": "61d96fdb34554f8e4edd4ad9"
+}
