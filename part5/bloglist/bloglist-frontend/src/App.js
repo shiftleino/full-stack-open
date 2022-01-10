@@ -144,7 +144,7 @@ const App = () => {
             <div>
                 <Notification message={notification} success={success} />
                 <h2>log in to application</h2>
-                <form onSubmit={handleLogin}>
+                <form onSubmit={handleLogin} id="loginForm" >
                     <div>
                 username
                         <input
