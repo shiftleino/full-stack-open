@@ -42,3 +42,16 @@ test("render url and likes when view clicked", () => {
     expect(component.container).toHaveTextContent("http://localhost")
     expect(component.container).toHaveTextContent("1000")
 })
+
+test("like amount changes when button pressed", () => {
+    const mockHandler = jest.fn()
+    const component = render(
+        <Blog blog={blog} user={user} likeBlog={mockHandler} />
+    )
+    const button = component.getByText("view")
+    fireEvent.click(button)
+    const button2 = component.getByText("like")
+    fireEvent.click(button2)
+    fireEvent.click(button2)
+    expect(mockHandler.mock.calls).toHaveLength(2)
+})
