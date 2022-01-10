@@ -62,4 +62,19 @@ describe("When logged in", function () {
         cy.get("#createButton").click()
         cy.contains("Best Full-Stack experience Shiftleino")
     })
+
+    it("A blog can be liked", function() {
+        cy.contains("create new blog").click()
+        cy.get("#title").type("Best Full-Stack experience")
+        cy.get("#author").type("Shiftleino")
+        cy.get("#url").type("http://localhost:3000")
+        cy.get("#createButton").click()
+        cy.contains("Best Full-Stack experience Shiftleino")
+            .contains("view").click()
+        cy.contains("likes 0")
+        cy.contains("Best Full-Stack experience Shiftleino")
+            .contains("like").click()
+        cy.contains("likes 1")
+
+    })
 })
