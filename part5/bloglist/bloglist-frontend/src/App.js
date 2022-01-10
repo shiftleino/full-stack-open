@@ -69,6 +69,8 @@ const App = () => {
     const createBlog = async ({ title, author, url }) => {
         try {
             const blog = await blogService.create({ title, author, url })
+            blogService.getAll().then(blogs =>
+                setBlogs(blogs))
             setSuccess(true)
             setNotification(`A new blog ${title} by ${author} added`)
             setTimeout(() => {

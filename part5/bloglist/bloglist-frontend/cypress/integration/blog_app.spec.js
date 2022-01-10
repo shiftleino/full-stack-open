@@ -75,6 +75,18 @@ describe("When logged in", function () {
         cy.contains("Best Full-Stack experience Shiftleino")
             .contains("like").click()
         cy.contains("likes 1")
+    })
 
+    it("A blog can be removed", function() {
+        cy.contains("create new blog").click()
+        cy.get("#title").type("Best Full-Stack experience")
+        cy.get("#author").type("Shiftleino")
+        cy.get("#url").type("http://localhost:3000")
+        cy.get("#createButton").click()
+        cy.contains("Best Full-Stack experience Shiftleino")
+            .contains("view").click()
+        cy.contains("Best Full-Stack experience Shiftleino")
+            .contains("remove").click()
+        cy.get("html").should("not.contain", "Best Full-Stack experience Shiftleino")
     })
 })
