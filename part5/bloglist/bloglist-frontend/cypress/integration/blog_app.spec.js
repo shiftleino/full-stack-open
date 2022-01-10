@@ -37,3 +37,29 @@ describe("Login", function() {
         cy.contains("wrong credentials")
     })
 })
+
+describe("When logged in", function () {
+    beforeEach(function () {
+        const user = {
+            username: "shiftleino",
+            name: "Shiftleino",
+            password: "password"
+        }
+        cy.request("POST", "http://localhost:3003/api/testing/reset")
+        cy.request("POST", "http://localhost:3003/api/users", user)
+        cy.visit("http://localhost:3000")
+        cy.contains("login").click()
+        cy.get("#username").type("shiftleino")
+        cy.get("#password").type("password")
+        cy.get("#loginButton").click()
+    })
+
+    it("A blog can be created", function() {
+        cy.contains("create new blog").click()
+        cy.get("#title").type("Best Full-Stack experience")
+        cy.get("#author").type("Shiftleino")
+        cy.get("#url").type("http://localhost:3000")
+        cy.get("#createButton").click()
+        cy.contains("Best Full-Stack experience Shiftleino")
+    })
+})
