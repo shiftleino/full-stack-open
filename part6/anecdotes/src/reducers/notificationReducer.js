@@ -1,4 +1,4 @@
-const initialState = "This is a notification"
+const initialState = ""
 
 export const showNotification = (notification) => {
     return {
@@ -13,7 +13,7 @@ export const showEmpty = () => {
     }
 }
 
-const reducer = (state= initialState, action) => {
+const reducer = (state=initialState, action) => {
     switch(action.type) {
         case "EMPTY":
             return ""
