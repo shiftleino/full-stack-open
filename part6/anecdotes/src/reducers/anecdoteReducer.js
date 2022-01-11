@@ -26,13 +26,26 @@ export const voteAnecdote = (id) => {
   }
 }
 
+export const addAnecdote = (anecdote) => {
+  return {
+    type: "NEW",
+    data: {
+      content: anecdote,
+      id: getId(),
+      votes: 0
+    }
+  }
+}
+
 const reducer = (state = initialState, action) => {
   switch(action.type) {
     case "VOTE":
       let anecdote = state.find(a => a.id === action.data.id)
       anecdote = {...anecdote, votes: anecdote.votes + 1}
       return state.map(a => a.id  === anecdote.id ? anecdote : a)
-    default: return state
+    case "NEW":
+      return [...state, action.data]
+      default: return state
   }
 }
 
